@@ -10,14 +10,10 @@ import android.view.ViewGroup;
 
 import static com.musicplayer.SongListController.musicFiles;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SongsFragment newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class SongsFragment extends Fragment {
 
-    RecyclerView recyclerView;
+    RecyclerView recyclerView; //provide a limited window for a large data set (list for example)
     MusicAdapter musicAdapter;
 
     public SongsFragment() {
@@ -36,7 +32,7 @@ public class SongsFragment extends Fragment {
         if(!(musicFiles.size()<1))
         {
             musicAdapter = new MusicAdapter(getContext(), musicFiles);
-            recyclerView.setAdapter(musicAdapter);
+            recyclerView.setAdapter(musicAdapter); //set adapter to provide child views in demand
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         }
         return view;
