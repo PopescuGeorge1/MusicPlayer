@@ -5,15 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".SongListController"
+    tools:context=".MainActivity"
     >
-<!--    <Button-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="40dp"-->
-<!--        android:layout_marginLeft="40dp"-->
-<!--        android:id="@+id/goToMain"-->
-<!--        android:onClick="toMain"/>-->
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
