@@ -29,8 +29,15 @@ public class MusicFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_songs, container, false);
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
+        //test improved recyclerView performance
+        /*improved after full view and load of the list, still not fully smooth*/
+        recyclerView.setItemViewCacheSize(40);
+        recyclerView.setDrawingCacheEnabled(true);
+        recyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+        //
         if(!(musicFiles.size()<1))
         //possible solution to lag problem, read and memorise all files so it doesn't load them every time
+            // loading the entire list might not be a good ideea for long lists
         {
             musicAdapter = new MusicAdapter(getContext(), musicFiles);
             recyclerView.setAdapter(musicAdapter); //set adapter to provide child views in demand

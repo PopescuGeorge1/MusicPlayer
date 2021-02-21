@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.SearchView;
 
 import java.util.ArrayList;
@@ -41,7 +42,17 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     public static final int REQUEST_CODE=1; //requires further detailing(why=1?)
     static ArrayList<MusicFiles>musicFiles;
     static boolean shuffleBoolean=false, repeatBoolean = false;
+    static ArrayList <MusicFiles> playList = new ArrayList<>();
     private String my_sort_pref = "SortOrder";
+//    FrameLayout frag_bottom_player;
+    public static final String MUSIC_FILE_LAST_PLAYED = "LAST_PLAYED";
+    public static final String MUSIC_FILE = "STORED_MUSIC";
+    public static boolean SHOW_MINI_PLAYER = false;
+    public static String PATH_TO_FRAG = null;
+    public static String ARTIST_TO_FRAG = null;
+    public static String SONG_NAME_TO_FRAG = null;
+    public static final String SONG_NAME = "SONG NAME";
+    public static final String ARTIST_NAME = "ARTIST NAME";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -238,5 +249,26 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences preferences = getSharedPreferences(MUSIC_FILE_LAST_PLAYED, MODE_PRIVATE);
+        String path = preferences.getString(MUSIC_FILE, null);
+        String artist = preferences.getString(ARTIST_NAME, null);
+        String song_name = preferences.getString(SONG_NAME, null);
+        if(path!=null){
+            SHOW_MINI_PLAYER=true;
+            PATH_TO_FRAG=path;
+            ARTIST_TO_FRAG=artist;
+            SONG_NAME_TO_FRAG=song_name;
+        }
+        else{
+            SHOW_MINI_PLAYER=false;
+            PATH_TO_FRAG=null;
+            ARTIST_TO_FRAG=null;
+            SONG_NAME_TO_FRAG=null;
+        }
     }
 }
