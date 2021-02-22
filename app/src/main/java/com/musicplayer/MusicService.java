@@ -119,16 +119,21 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     }
 
     void start(){
-        mediaPlayer.start();
+        if(mediaPlayer!=null)
+            mediaPlayer.start();
     }
     boolean isPlaying(){
-        return mediaPlayer.isPlaying();
+        if(mediaPlayer!=null)
+            return mediaPlayer.isPlaying();
+        return false;
     }
     void stop(){
-        mediaPlayer.stop();
+        if(mediaPlayer!=null)
+           mediaPlayer.stop();
     }
     void release(){
-        mediaPlayer.release();
+        if(mediaPlayer!=null)
+            mediaPlayer.release();
     }
     int getDuration(){
         //attempt to resolve test error
@@ -217,7 +222,9 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         {
             thumb = BitmapFactory.decodeResource(getResources(),R.drawable.music_art);
         }
-        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID_2)
+        Notification notification=null;
+        if(musicFiles.size()>0){
+            notification = new NotificationCompat.Builder(this, CHANNEL_ID_2)
                 .setSmallIcon(playPauseBtn)
                 .setLargeIcon(thumb)
                 .setContentTitle(musicFiles.get(position).getTitle())
@@ -231,7 +238,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
                 .setOnlyAlertOnce(true)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .build();
-       startForeground(2, notification);
+       startForeground(2, notification);}
     }
     private byte[] getAlbumArt(String uri){
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();

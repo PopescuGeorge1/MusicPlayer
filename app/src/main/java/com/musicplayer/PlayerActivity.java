@@ -225,6 +225,7 @@ public class  PlayerActivity extends AppCompatActivity
     }
 
     public void prevBtnClicked() {
+        if(listSongs!=null)
         if(musicService.isPlaying()){
             musicService.stop();
             musicService.release();
@@ -303,6 +304,7 @@ public class  PlayerActivity extends AppCompatActivity
     }
 
     public void nextBtnClicked() {
+        if(listSongs!=null)
         if(musicService.isPlaying()){
             musicService.stop();
             musicService.release();

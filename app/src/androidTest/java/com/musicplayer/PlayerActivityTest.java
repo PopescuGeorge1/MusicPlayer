@@ -1,7 +1,11 @@
 package com.musicplayer;
 
+import android.media.Image;
 import android.media.MediaPlayer;
+import android.provider.ContactsContract;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.SeekBar;
 
 import androidx.test.rule.ActivityTestRule;
 
@@ -16,7 +20,7 @@ public class PlayerActivityTest {
 
     @Rule
     public ActivityTestRule<PlayerActivity> pActivityR = new ActivityTestRule<PlayerActivity>(PlayerActivity.class);
-    public PlayerActivity pActivity=null;
+    private PlayerActivity pActivity=null;
 
     @Before
     public void setUp(){
@@ -66,6 +70,27 @@ public class PlayerActivityTest {
         assertNotNull(v);
         v = pActivity.findViewById(R.id.time_played);
         assertNotNull(v);
+    }
+
+    @Test
+    public void testImageViews(){
+        ImageView imageView = pActivity.findViewById(R.id.play_pause);
+        /*imageView.performClick();//doesn't work*/
+        imageView.callOnClick();
+        imageView = pActivity.findViewById(R.id.skip_next);
+        imageView.callOnClick();
+        imageView = pActivity.findViewById(R.id.skip_previous);
+        imageView.callOnClick();
+        imageView = pActivity.findViewById(R.id.cycle);
+        imageView.callOnClick();
+        imageView = pActivity.findViewById(R.id.shuffle);
+        imageView.callOnClick();
+    }
+
+    @Test
+    public void testSeekBar(){
+        SeekBar seekBar = pActivity.findViewById(R.id.seekBar);
+        seekBar.callOnClick();
     }
 
     @After
