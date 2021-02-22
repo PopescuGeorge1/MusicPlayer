@@ -26,7 +26,7 @@ import java.io.File;
 import java.time.Duration;
 import java.util.ArrayList;
 
-public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder> implements  {
+public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder>  {
 
     private Context mContext;
     static ArrayList<MusicFiles> mFiles;
@@ -59,7 +59,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
         }else{
             Glide.with(mContext).load(R.drawable.music_art).into(myViewHolder.album_art);
         }
-
+        //if else statement misses, images from neighbouring music files will be loaded
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

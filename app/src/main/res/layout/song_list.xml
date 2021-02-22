@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
@@ -22,7 +22,22 @@
 
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/viewPager"
+        android:layout_below="@id/tab_layout"
+        android:layout_alignParentBottom="@+id/frag_bottom_player"
         />
-</LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/frag_bottom_player"
+        android:layout_alignParentBottom="true">
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:name="com.musicplayer.NowPlayingFragment"
+            tools:layout="@layout/fragment_now_playing"
+            />
+    </FrameLayout>
+    
+</RelativeLayout>

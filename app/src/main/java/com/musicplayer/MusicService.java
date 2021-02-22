@@ -42,6 +42,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     public static final String SONG_NAME = "SONG NAME";
     public static final String ARTIST_NAME = "ARTIST NAME";
 
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -130,7 +131,12 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         mediaPlayer.release();
     }
     int getDuration(){
-        return mediaPlayer.getDuration();
+        //attempt to resolve test error
+        if(mediaPlayer!=null)
+            return mediaPlayer.getDuration();
+        else
+            return -1;
+        //attempt to resolve test error; originally there was no if here
     }
     void seekTo(int position){
         mediaPlayer.seekTo(position);
@@ -146,7 +152,11 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         mediaPlayer = MediaPlayer.create(getBaseContext(), uri);
     }
     int getCurrentPosition(){
-        return mediaPlayer.getCurrentPosition();
+        //attempt to resolve test error; originally there was no if here
+        if(mediaPlayer!=null)
+            return mediaPlayer.getCurrentPosition();
+        else
+            return 0;
     }
     void pause(){
         mediaPlayer.pause();
@@ -166,7 +176,8 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
 
     }
     void OnCompleted(){
-        mediaPlayer.setOnCompletionListener(this);
+        if(mediaPlayer!=null)
+            mediaPlayer.setOnCompletionListener(this);
     }
     void setCallBack(ActionPlaying actionPlaying){
         this.actionPlaying=actionPlaying;
@@ -194,7 +205,10 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
                 nextIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         byte[] picture = null;
-        picture = getAlbumArt(musicFiles.get(position).getPath());
+        //attempt to resolve test error
+        if(position>0)
+            picture = getAlbumArt(musicFiles.get(position).getPath());
+        //attempt to resolve test error
         Bitmap thumb = null;
         if(picture!=null){
             thumb = BitmapFactory.decodeByteArray(picture,0,picture.length);
